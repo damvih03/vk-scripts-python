@@ -31,11 +31,13 @@ def get_winner(token: str, album_link: str, date: datetime.datetime) -> str:
             return "0/0 ошибка..."
         if count > winner_points:
             winner_points = count
-            winner_output = f"\nID победителя: {photo_id}\n{photo_text}\nРезультат: {count}/{len(likes_list)}"
+            winner_output = str()
             winners_list = list()
             winners_list.append(photo_id)
+            winner_output = f"\nID победителей:\n[{len(winners_list)}] {photo_id}\n{photo_text}\nРезультат: {count}/{len(likes_list)}"
         elif count == winner_points:
             winners_list.append(photo_id)
+            winner_output += "\n\n" + f"[{len(winners_list)}] {photo_id}\n{photo_text}\nРезультат: {count}/{len(likes_list)}"
         result_dict["result"][photo_id] = {
             "text": photo_text,
             "counted": count,
